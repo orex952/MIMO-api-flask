@@ -1,11 +1,15 @@
-
 from flask import Flask, jsonify, request
 import requests
 
 app = Flask(__name__)
 
+# Inserisci la tua API key di NewsAPI
 NEWS_API_KEY = '70d6dc47696245029782e856a3c6b5ff'
 NEWS_API_URL = 'https://newsapi.org/v2/top-headlines'
+
+@app.route('/')
+def home():
+    return '<h1>API MIMO è attiva</h1><p>Usa <code>/notizie</code> per ottenere le notizie.</p>'
 
 @app.route('/notizie', methods=['GET'])
 def get_news():
@@ -32,3 +36,6 @@ def get_news():
             'data': articolo['publishedAt']
         })
     return jsonify(notizie)
+
+if __name__ == '__main__':
+    app.run(debug=True)
