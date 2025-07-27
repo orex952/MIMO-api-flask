@@ -1,15 +1,16 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
+from flask_cors import CORS
 import requests
 
 app = Flask(__name__)
+CORS(app)
 
-# Inserisci la tua API key di NewsAPI
 NEWS_API_KEY = '70d6dc47696245029782e856a3c6b5ff'
 NEWS_API_URL = 'https://newsapi.org/v2/top-headlines'
 
 @app.route('/')
 def home():
-    return '<h1>API MIMO è attiva</h1><p>Usa <code>/notizie</code> per ottenere le notizie.</p>'
+    return render_template('index.html')
 
 @app.route('/notizie', methods=['GET'])
 def get_news():
